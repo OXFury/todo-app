@@ -8,12 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: todo-list-main/todo-list-main/client
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Build Docker Image
-      run: docker build -t todo-app .
+    - name: Install dependencies
+      run: npm install
 
-    - name: Run Docker Container
-      run: docker run -d -p 8080:80 todo-app
+    - name: Build React App
+      run: npm run build
